@@ -24,15 +24,18 @@ public class Hash {
     }
 
     public int funcaoHashMultiplicacao(Registro registro) {
-        int hash = 13;
-        hash = 7 * hash + posicoes;
-        hash = 7 * hash + num_itens;
+        int incremento = 13;
+        int incrementoFinal = 0;
+        incremento = 7 * incremento;
+        incremento = incremento + posicoes;
+        incremento = 7 * incremento;
+        incremento = incremento + num_itens;
 
         if (registro != null) {
-            hash = 7 * hash + registro.getChassi();
+            incrementoFinal = 7 * incremento + registro.getChassi();
         }
 
-        return hash % posicoes;
+        return incrementoFinal % posicoes;
     }
 
     public int funcaoHashDobramento(Registro registro) {
@@ -41,8 +44,9 @@ public class Hash {
 
         while (chassi > 0) {
             int digito = chassi % 10;
-            soma = (soma * 10) + digito;
-            chassi /= 10;
+            soma = soma * 10;
+            soma = soma + digito;
+            chassi = chassi / 10;
         }
 
         return soma % posicoes;
